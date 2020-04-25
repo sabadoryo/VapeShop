@@ -1,0 +1,74 @@
+﻿@model VapeShop.Models.Vape
+
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VapeId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortDescription" class="control-label"></label>
+                <input asp-for="ShortDescription" class="form-control" />
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LongDescription" class="control-label"></label>
+                <input asp-for="LongDescription" class="form-control" />
+                <span asp-validation-for="LongDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AllergyInformation" class="control-label"></label>
+                <input asp-for="AllergyInformation" class="form-control" />
+                <span asp-validation-for="AllergyInformation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageThumbnailUrl" class="control-label"></label>
+                <input asp-for="ImageThumbnailUrl" class="form-control" />
+                <span asp-validation-for="ImageThumbnailUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsVapeOfTheWeek" /> @Html.DisplayNameFor(model => model.IsVapeOfTheWeek)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="InStock" /> @Html.DisplayNameFor(model => model.InStock)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" class="form-control" asp-items="@ViewBag.Categories"></select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Save" class="btn btn-default"></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

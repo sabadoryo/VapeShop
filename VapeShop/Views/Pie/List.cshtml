@@ -1,0 +1,9 @@
+﻿@model VapesListViewModel
+
+
+<h1>@Model.CurrentCategory</h1>
+
+@foreach (var vape in Model.Vapes)
+{
+    <partial name="_VapeCard" model="vape"/>
+}

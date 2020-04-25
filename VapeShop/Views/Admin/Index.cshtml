@@ -1,0 +1,93 @@
+﻿@model IEnumerable<VapeShop.Models.Vape>
+
+<section class="content-header">
+    <h1>
+        POD Systems
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-controller="Home" asp-action="Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">POD Systems</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Manage POD Systems</h3>
+                </div>
+                <a asp-action="CreatePage" asp-controller="Admin">Create POD</a>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Short Description</th>
+                                <th>Long Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.VapeId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ShortDescription)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.LongDescription)</td>
+                                    <td><a href="Update/@item.VapeId">Update</a> | <a href="" onclick="Delete('@item.VapeId')">Delete</a></td>
+                                </tr>
+                            }
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+<!-- DataTables -->
+<script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="~/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<!-- page script -->
+<script>
+    $(function () {
+        $('#example1').DataTable();
+    });
+    function Delete(id){
+        var txt;
+        var r = confirm("Are you sure you want to Delete?");
+        if (r == true) {
+
+            $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("Delete", "Admin")',
+                data: {
+                    id: id
+                },
+                error: function (result) {
+                    alert("error");
+                },
+                success: function (result) {
+                    if (result == true) {
+                        var baseUrl="/Admin";
+                        window.location.reload();
+                    }
+                    else {
+                        alert("There is a problem, Try Later!");
+                    }
+                }
+            });
+        }
+    }
+</script>
