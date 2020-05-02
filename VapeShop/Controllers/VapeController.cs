@@ -8,12 +8,12 @@ using VapeShop.ViewModels;
 
 namespace VapeShop.Controllers
 {
-    public class PieController : Controller
+    public class VapeController : Controller
     {
         private readonly IVapeRepository _vapeRepository;
         private readonly ICategoryRepository _categoryRepository;
 
-        public PieController(IVapeRepository vapeRepository, ICategoryRepository categoryRepository)
+        public VapeController(IVapeRepository vapeRepository, ICategoryRepository categoryRepository)
         {
             _vapeRepository = vapeRepository;
             _categoryRepository = categoryRepository;
