@@ -30,8 +30,18 @@ namespace VapeShop.Controllers
         {
             return View(_vapeRepository.AllVapes.ToList());
         }
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult ValidateName(string name)
+        {
+            Vape vape = _appDbContext.Vapes.SingleOrDefault(p => p.Name == name);
+            
+            if (vape != null)
+                return Json($"Email {name} is already in use.");
 
-        public IActionResult CreatePage()
+            return Json(data: true);
+        }
+
+        public IActionResult Create()
         {
             ViewBag.Categories = _categoryRepository.AllCategories.Select(li => new SelectListItem
             { Text = li.CategoryName, Value = li.CategoryId.ToString() });
@@ -40,11 +50,15 @@ namespace VapeShop.Controllers
         [HttpPost]
         public IActionResult Create(Vape vape)
         {
-            vape.CategoryId = 3;
-            // _pieRepository.CreatePie(pie);
-            _appDbContext.Vapes.Add(vape);
-            _appDbContext.SaveChanges();
-            return RedirectToAction("Index", "Admin");
+            if (ModelState.IsValid)
+            {
+                vape.CategoryId = 3;
+                // _pieRepository.CreatePie(pie);
+                _appDbContext.Vapes.Add(vape);
+                _appDbContext.SaveChanges();
+                return RedirectToAction("Index", "Admin");
+            }
+            return View(vape);
         }
         /*
         [HttpPost]

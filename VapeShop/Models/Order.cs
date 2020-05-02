@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
 namespace VapeShop.Models
 {
-    public class Order
+    public class Order : IValidatableObject
     {
         [BindNever]
         public int OrderId { get; set; }
@@ -66,5 +66,14 @@ namespace VapeShop.Models
         [BindNever]
         [ScaffoldColumn(false)]
         public DateTime OrderPlaced { get; set; }
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Country != "Kazakhstan")
+            {
+                yield return new ValidationResult(
+                $"Due to the qarantine we have delivery only to the Kazakhstan", new[] { nameof(Country) }
+                );
+            }
+        }
     }
 }
