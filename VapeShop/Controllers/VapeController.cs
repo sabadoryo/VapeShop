@@ -37,6 +37,8 @@ namespace VapeShop.Controllers
             IEnumerable<Vape> vapes;
             string currentCategory;
 
+    
+
             if (string.IsNullOrEmpty(category))
             {
                 vapes = _vapeRepository.AllVapes.OrderBy(p => p.VapeId);
@@ -59,7 +61,9 @@ namespace VapeShop.Controllers
 
         public IActionResult Details(int id)
         {
+
             var vape = _vapeRepository.GetVapeById(id);
+            
             if (vape == null)
                 return NotFound();
 

@@ -31,6 +31,8 @@ namespace VapeShop.Models
             }
         }
 
+       
+
         public Vape GetVapeById(int pieId)
         {
             return _appDbContext.Vapes.FirstOrDefault(p => p.VapeId == pieId);
